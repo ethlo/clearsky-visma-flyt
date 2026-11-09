@@ -1,0 +1,22 @@
+{
+  "name": "flyt",
+  "label": "Visma Flyt Skole",
+  "version": "1.0.0",
+  "description": "School messages, forms and weekly plans for your children, from Visma Flyt Skole (Min Skole / Flyt Foresatt).",
+  "clearsky": 1,
+  "entry": "source.mjs",
+  "area": "personal",
+  "panel": { "title": "School", "zone": "needs", "view": "table" },
+  "settings": {
+    "FLYT_SCHOOL_KEY": { "label": "School portal key", "hint": "The last part of https://foresatt.visma.no/<key>. Filled in for you when you log in, if the portal tells us.", "secret": false },
+    "FLYT_EVENTS": { "label": "Weekly plans in the calendar", "hint": "on (default) or off. Reads the PDF and Word files on recent school messages and puts what's on each day (trips, gym, when school ends, homework) on a calendar of its own in Clearsky.", "secret": false },
+    "FLYT_CALENDAR": { "label": "Calendar for weekly plans", "hint": "The name of that calendar, School by default. Hide or show it from the day schedule like any other.", "secret": false }
+  },
+  "enabledWhen": ["FLYT_SCHOOL_KEY"],
+  "hosts": ["foresatt.visma.no", "api.foresatt.visma.no"],
+  "clis": ["pdftotext", "secret-tool"],
+  "secrets": [{ "kind": "web-session", "note": "the three cookies from your BankID login, in the GNOME keyring (or ~/.config/clearsky/flyt-session.json)" }],
+  "files": ["~/.config/clearsky/flyt-session.json", "~/.config/clearsky/school-events.json"],
+  "note": "The login opens a browser window on ID-porten; only the cookies for the school portal are kept.",
+  "outside": "It logs in with BankID in a browser window and keeps the login in your keyring."
+}
